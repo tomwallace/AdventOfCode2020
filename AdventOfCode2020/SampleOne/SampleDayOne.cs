@@ -8,12 +8,12 @@ namespace AdventOfCode2020.SampleOne
     {
         public string Description()
         {
-            return "The Tyranny of the Rocket Equation";
+            return "Sample From Last Year: The Tyranny of the Rocket Equation";
         }
 
         public int SortOrder()
         {
-            return 1;
+            return 99;
         }
 
         public string PartA()
