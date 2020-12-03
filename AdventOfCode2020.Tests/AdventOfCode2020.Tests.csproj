@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DayOneTests.cs" />
+    <Compile Include="DayThreeTests.cs" />
     <Compile Include="DayTwoTests.cs" />
     <Compile Include="SampleDayOneTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
