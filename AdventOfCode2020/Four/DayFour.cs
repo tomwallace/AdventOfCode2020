@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AdventOfCode2020.Utility;
 
 namespace AdventOfCode2020.Four
 {
@@ -33,8 +34,7 @@ namespace AdventOfCode2020.Four
 
         public int FindNumberOfValidPassports(string filePath)
         {
-            PassportFactory factory = new PassportFactory(filePath);
-            List<Passport> passports = factory.Create();
+            List<Passport> passports = FileUtility.ParseFileToMultiLineList(filePath, lineGroup => new Passport(lineGroup), " ");
 
             int validPassports = passports.Count(p => new PassportValidator(p).IsValidSimple());
 
@@ -43,8 +43,7 @@ namespace AdventOfCode2020.Four
 
         public int FindNumberOfValidPassportsByRules(string filePath)
         {
-            PassportFactory factory = new PassportFactory(filePath);
-            List<Passport> passports = factory.Create();
+            List<Passport> passports = FileUtility.ParseFileToMultiLineList(filePath, lineGroup => new Passport(lineGroup), " ");
 
             int validPassports = passports.Count(p => new PassportValidator(p).IsValidRules());
 

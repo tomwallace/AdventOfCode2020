@@ -57,13 +57,14 @@
     <Compile Include="Five\DayFive.cs" />
     <Compile Include="Four\DayFour.cs" />
     <Compile Include="Four\Passport.cs" />
-    <Compile Include="Four\PassportFactory.cs" />
     <Compile Include="Four\PassportValidator.cs" />
     <Compile Include="IAdventProblemSet.cs" />
     <Compile Include="One\DayOne.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleOne\SampleDayOne.cs" />
+    <Compile Include="Six\DaySix.cs" />
+    <Compile Include="Six\GroupResponse.cs" />
     <Compile Include="Three\DayThree.cs" />
     <Compile Include="Three\Slope.cs" />
     <Compile Include="Two\DayTwo.cs" />
@@ -94,6 +95,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SampleOne\SampleDayOneInput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Six\DaySixInput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Six\DaySixTestInputA.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Three\DayThreeInput.txt">
