@@ -53,6 +53,9 @@
     <Compile Include="Console\Commands\RunCommand.cs" />
     <Compile Include="Console\Commands\VersionCommand.cs" />
     <Compile Include="Console\ICommand.cs" />
+    <Compile Include="Eight\DayEight.cs" />
+    <Compile Include="Eight\Instruction.cs" />
+    <Compile Include="Eight\Program.cs" />
     <Compile Include="Five\AirplaneSeat.cs" />
     <Compile Include="Five\DayFive.cs" />
     <Compile Include="Four\DayFour.cs" />
@@ -79,6 +82,12 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Eight\DayEightInput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Eight\DayEightTestInputA.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Five\DayFiveInput.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
