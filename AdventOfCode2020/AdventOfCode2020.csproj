@@ -56,6 +56,8 @@
     <Compile Include="Eight\DayEight.cs" />
     <Compile Include="Eight\Instruction.cs" />
     <Compile Include="Eight\Program.cs" />
+    <Compile Include="Eleven\DayEleven.cs" />
+    <Compile Include="Eleven\Point.cs" />
     <Compile Include="Five\AirplaneSeat.cs" />
     <Compile Include="Five\DayFive.cs" />
     <Compile Include="Four\DayFour.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="Seven\DaySeven.cs" />
     <Compile Include="Six\DaySix.cs" />
     <Compile Include="Six\GroupResponse.cs" />
+    <Compile Include="Ten\DayTen.cs" />
     <Compile Include="Three\DayThree.cs" />
     <Compile Include="Three\Slope.cs" />
     <Compile Include="Two\DayTwo.cs" />
@@ -87,6 +90,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Eight\DayEightTestInputA.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Eleven\DayElevenInput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Eleven\DayElevenTestInputA.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Five\DayFiveInput.txt">
@@ -126,6 +135,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Six\DaySixTestInputA.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ten\DayTenInput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ten\DayTenTestInputA.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Ten\DayTenTestInputB.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Three\DayThreeInput.txt">
