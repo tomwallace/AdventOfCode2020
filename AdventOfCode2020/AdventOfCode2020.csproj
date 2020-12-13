@@ -58,6 +58,7 @@
     <Compile Include="Eight\Program.cs" />
     <Compile Include="Eleven\DayEleven.cs" />
     <Compile Include="Eleven\Point.cs" />
+    <Compile Include="Eleven\SeatingArea.cs" />
     <Compile Include="Five\AirplaneSeat.cs" />
     <Compile Include="Five\DayFive.cs" />
     <Compile Include="Four\DayFour.cs" />
@@ -77,6 +78,9 @@
     <Compile Include="Ten\DayTen.cs" />
     <Compile Include="Three\DayThree.cs" />
     <Compile Include="Three\Slope.cs" />
+    <Compile Include="Twelve\DayTwelve.cs" />
+    <Compile Include="Twelve\Location.cs" />
+    <Compile Include="Twelve\Ship.cs" />
     <Compile Include="Two\DayTwo.cs" />
     <Compile Include="Two\PasswordData.cs" />
     <Compile Include="Utility\FileUtility.cs" />
@@ -150,6 +154,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Three\DayThreeTestInputA.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Twelve\DayTwelveInput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Twelve\DayTwelveTestInputA.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Two\DayTwoInput.txt">
