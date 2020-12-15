@@ -36,16 +36,13 @@ namespace AdventOfCode2020.Tests
             Assert.Equal("2210", result);
         }
 
-        // TODO: revisit as is running forever now
-        /*
         [Fact]
         public void PartB_Actual()
         {
             var sut = new DayTen();
             var result = sut.PartB();
 
-            Assert.Equal("-1", result);
+            Assert.Equal("7086739046912", result);
         }
-        */
     }
 }

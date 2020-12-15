@@ -75,97 +75,26 @@ namespace AdventOfCode2020.Ten
 
         public long FindNumberOfValidAdapterCombos(string filePath)
         {
-            List<int> adapters = FileUtility.ParseFileToList(filePath, line => int.Parse(line));
-            var startingJoltage = 0;
-            var max = adapters.Max();
+            List<int> adapters = FileUtility.ParseFileToList(filePath, line => int.Parse(line))
+                .OrderBy(a => a).ToList();
 
-            return FindValidAdaptersRecurse(startingJoltage, max, adapters);
-        }
+            adapters.Add(adapters.Max() + 3);
 
-        public long FindValidAdaptersRecurse(int currentJoltage, int max, List<int> adapters)
-        {
-            int flexibility = 3;
+            // I struggled with this one and got some help from Reddit.
 
-            if (currentJoltage >= max)
-                return 1;
+            // Seed for first value - 0
+            var routes = new Dictionary<int, long> { { 0, 1 } };
 
-            List<int> usableAdapters = adapters.Where(a => a >= currentJoltage && a <= currentJoltage + flexibility).ToList();
-            if (!usableAdapters.Any())
-                return 0;
-
-            long recursiveReturnValue = 0;
-            // Recurse over usableAdapters
-            foreach (int usableAdapter in usableAdapters)
+            foreach (var adapter in adapters)
             {
-                List<int> adjustedList = adapters.Where(a => a > usableAdapter).ToList();
-                adjustedList.Remove(usableAdapter);
-                int pathJoltage = usableAdapter;
+                var minusOne = routes.ContainsKey(adapter - 1) ? routes[adapter - 1] : 0;
+                var minusTwo = routes.ContainsKey(adapter - 2) ? routes[adapter - 2] : 0;
+                var minusThree = routes.ContainsKey(adapter - 3) ? routes[adapter - 3] : 0;
 
-                recursiveReturnValue += FindValidAdaptersRecurse(pathJoltage, max, adjustedList);
+                routes[adapter] = minusOne + minusTwo + minusThree;
             }
 
-            return recursiveReturnValue;
+            return routes[adapters.Max()];
         }
-
-        public long FindNumberOfValidAdapterCombosWithQueue(string filePath)
-        {
-            List<int> adapters = FileUtility.ParseFileToList(filePath, line => int.Parse(line));
-            var startingJoltage = 0;
-            int flexibility = 3;
-            var max = adapters.Max();
-            long total = 0;
-
-            Queue<AdapterStep> queue = new Queue<AdapterStep>();
-            queue.Enqueue(new AdapterStep(startingJoltage, adapters));
-
-            do
-            {
-                AdapterStep current = queue.Dequeue();
-                if (current.CurrentJoltage >= max)
-                    total++;
-                else
-                {
-                    List<int> usableAdapters = current.Adapters.Where(a =>
-                        a >= current.CurrentJoltage && a <= current.CurrentJoltage + flexibility).ToList();
-
-                    foreach (int usableAdapter in usableAdapters)
-                    {
-                        List<int> adjustedList = new List<int>(current.Adapters); //.Select(a => a).ToList());adapters.Select(a => a).ToList();
-                        adjustedList.Remove(usableAdapter);
-                        // int pathJoltage = current.CurrentJoltage + usableAdapter;
-
-                        queue.Enqueue(new AdapterStep(usableAdapter, adjustedList));
-                    }
-                }
-            } while (queue.Any());
-
-            return total;
-        }
-    }
-
-    public class Adapter
-    {
-        public Adapter(int joltageRating, int flexibility)
-        {
-            JoltageRating = joltageRating;
-            Flexibility = flexibility;
-        }
-
-        public int JoltageRating { get; set; }
-
-        public int Flexibility { get; set; }
-    }
-
-    public class AdapterStep
-    {
-        public AdapterStep(int currentJoltage, List<int> adapters)
-        {
-            CurrentJoltage = currentJoltage;
-            Adapters = adapters;
-        }
-
-        public int CurrentJoltage { get; set; }
-
-        public List<int> Adapters { get; set; }
     }
 }

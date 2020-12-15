@@ -61,6 +61,8 @@
     <Compile Include="Eleven\SeatingArea.cs" />
     <Compile Include="Five\AirplaneSeat.cs" />
     <Compile Include="Five\DayFive.cs" />
+    <Compile Include="Fourteen\Address.cs" />
+    <Compile Include="Fourteen\DayFourteen.cs" />
     <Compile Include="Four\DayFour.cs" />
     <Compile Include="Four\Passport.cs" />
     <Compile Include="Four\PassportValidator.cs" />
@@ -75,6 +77,7 @@
     <Compile Include="Seven\DaySeven.cs" />
     <Compile Include="Six\DaySix.cs" />
     <Compile Include="Six\GroupResponse.cs" />
+    <Compile Include="Ten\Adapter.cs" />
     <Compile Include="Ten\DayTen.cs" />
     <Compile Include="Three\DayThree.cs" />
     <Compile Include="Three\Slope.cs" />
@@ -103,6 +106,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Five\DayFiveInput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fourteen\DayFourteenInput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fourteen\DayFourteenTestInputA.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Fourteen\DayFourteenTestInputB.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Four\DayFourInput.txt">
