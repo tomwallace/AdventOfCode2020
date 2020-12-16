@@ -59,6 +59,8 @@
     <Compile Include="Eleven\DayEleven.cs" />
     <Compile Include="Eleven\Point.cs" />
     <Compile Include="Eleven\SeatingArea.cs" />
+    <Compile Include="Fifteen\DayFifteen.cs" />
+    <Compile Include="Fifteen\NumberGame.cs" />
     <Compile Include="Five\AirplaneSeat.cs" />
     <Compile Include="Five\DayFive.cs" />
     <Compile Include="Fourteen\Address.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Six\GroupResponse.cs" />
     <Compile Include="Ten\Adapter.cs" />
     <Compile Include="Ten\DayTen.cs" />
+    <Compile Include="Thirteen\DayThirteen.cs" />
     <Compile Include="Three\DayThree.cs" />
     <Compile Include="Three\Slope.cs" />
     <Compile Include="Twelve\DayTwelve.cs" />
