@@ -75,6 +75,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleOne\SampleDayOne.cs" />
     <Compile Include="Seventeen\DaySeventeen.cs" />
+    <Compile Include="Seventeen\Dimension.cs" />
+    <Compile Include="Seventeen\Point.cs" />
+    <Compile Include="Seventeen\PointComparer.cs" />
     <Compile Include="Seven\Bag.cs" />
     <Compile Include="Seven\BagConnection.cs" />
     <Compile Include="Seven\DaySeven.cs" />

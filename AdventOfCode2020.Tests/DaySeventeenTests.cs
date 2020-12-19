@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using AdventOfCode2020.Seventeen;
+﻿using AdventOfCode2020.Seventeen;
+using System.Linq;
 using Xunit;
 
 namespace AdventOfCode2020.Tests
@@ -14,8 +14,8 @@ namespace AdventOfCode2020.Tests
         public void Dimension_GetNeighbors(int x, int y, int z, int expected)
         {
             string filePath = @"Seventeen\DaySeventeenTestInputA.txt";
-            var sut = new Dimension(filePath);
-            var point = new Point(x,y,z);
+            var sut = new Dimension(filePath, false);
+            var point = new Point(x, y, z, 0);
             var result = sut.GetNeighbors(point);
 
             Assert.Equal(26, result.Count);
@@ -23,14 +23,44 @@ namespace AdventOfCode2020.Tests
         }
 
         [Theory]
-        [InlineData(1, 0, 0, true, false)]
-        [InlineData(1, 2, 0, true, true)]
-        [InlineData(2, 1, 0, true, true)]
-        public void Dimension_ShouldActivate(int x, int y, int z, bool startingState, bool expected)
+        [InlineData(0, 0, 0, 1)]
+        [InlineData(1, 0, 0, 1)]
+        [InlineData(1, 2, 0, 3)]
+        [InlineData(2, 1, 0, 3)]
+        public void Dimension_GetNeighbors_WithW(int x, int y, int z, int expected)
         {
             string filePath = @"Seventeen\DaySeventeenTestInputA.txt";
-            var sut = new Dimension(filePath);
-            var point = new Point(x, y, z, startingState);
+            var sut = new Dimension(filePath, true);
+            var point = new Point(x, y, z, 0);
+            var result = sut.GetNeighbors(point);
+
+            Assert.Equal(80, result.Count);
+            Assert.Equal(expected, result.Count(p => p.Value));
+        }
+
+        [Theory]
+        [InlineData(1, 0, 0, false)]
+        [InlineData(1, 2, 0, true)]
+        [InlineData(2, 1, 0, true)]
+        public void Dimension_ShouldActivate(int x, int y, int z, bool expected)
+        {
+            string filePath = @"Seventeen\DaySeventeenTestInputA.txt";
+            var sut = new Dimension(filePath, false);
+            var point = new Point(x, y, z, 0);
+            var result = sut.ShouldActivate(point);
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(1, 0, 0, false)]
+        [InlineData(1, 2, 0, true)]
+        [InlineData(2, 1, 0, true)]
+        public void Dimension_ShouldActivate_WithW(int x, int y, int z, bool expected)
+        {
+            string filePath = @"Seventeen\DaySeventeenTestInputA.txt";
+            var sut = new Dimension(filePath, true);
+            var point = new Point(x, y, z, 0);
             var result = sut.ShouldActivate(point);
 
             Assert.Equal(expected, result);
@@ -40,13 +70,27 @@ namespace AdventOfCode2020.Tests
         public void Dimension_Run()
         {
             string filePath = @"Seventeen\DaySeventeenTestInputA.txt";
-            var sut = new Dimension(filePath);
+            var sut = new Dimension(filePath, false);
             sut.Run(6);
             var result = sut.CountActiveCubes();
 
             Assert.Equal(112, result);
         }
-        
+
+        // Takes 45 sec, so commenting out
+        /*
+        [Fact]
+        public void Dimension_Run_WithW()
+        {
+            string filePath = @"Seventeen\DaySeventeenTestInputA.txt";
+            var sut = new Dimension(filePath, true);
+            sut.Run(6);
+            var result = sut.CountActiveCubes();
+
+            Assert.Equal(848, result);
+        }
+        */
+
         [Fact]
         public void PartA_Actual()
         {
@@ -56,13 +100,16 @@ namespace AdventOfCode2020.Tests
             Assert.Equal("273", result);
         }
 
+        // Takes minutes, so commenting out
+        /*
         [Fact]
         public void PartB_Actual()
         {
             var sut = new DaySeventeen();
             var result = sut.PartB();
 
-            Assert.Equal("-1", result);
+            Assert.Equal("1504", result);
         }
+        */
     }
 }
