@@ -53,6 +53,7 @@
     <Compile Include="Console\Commands\RunCommand.cs" />
     <Compile Include="Console\Commands\VersionCommand.cs" />
     <Compile Include="Console\ICommand.cs" />
+    <Compile Include="Eighteen\DayEighteen.cs" />
     <Compile Include="Eight\DayEight.cs" />
     <Compile Include="Eight\Instruction.cs" />
     <Compile Include="Eight\Program.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Four\Passport.cs" />
     <Compile Include="Four\PassportValidator.cs" />
     <Compile Include="IAdventProblemSet.cs" />
+    <Compile Include="Nineteen\DayNineteen.cs" />
     <Compile Include="Nine\DayNine.cs" />
     <Compile Include="One\DayOne.cs" />
     <Compile Include="Program.cs" />
@@ -101,6 +103,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Eighteen\DayEighteenInput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Eight\DayEightInput.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -135,6 +140,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Four\DayFourTestInputC.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Nineteen\DayNineteenInput_Messages.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Nineteen\DayNineteenInput_Rules.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Nineteen\DayNineteenTestInputA_Messages.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Nineteen\DayNineteenTestInputA_Rules.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Nine\DayNineInput.txt">

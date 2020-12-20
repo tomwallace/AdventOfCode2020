@@ -63,12 +63,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DayEighteenTests.cs" />
     <Compile Include="DayEightTests.cs" />
     <Compile Include="DayElevenTests.cs" />
     <Compile Include="DayFifteenTests.cs" />
     <Compile Include="DayFiveTests.cs" />
     <Compile Include="DayFourteenTests.cs" />
     <Compile Include="DayFourTests.cs" />
+    <Compile Include="DayNineteenTests.cs" />
     <Compile Include="DayNineTests.cs" />
     <Compile Include="DayOneTests.cs" />
     <Compile Include="DaySeventeenTests.cs" />
