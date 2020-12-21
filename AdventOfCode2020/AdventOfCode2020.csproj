@@ -95,6 +95,7 @@
     <Compile Include="Twelve\Location.cs" />
     <Compile Include="Twelve\Ship.cs" />
     <Compile Include="Twenty\DayTwenty.cs" />
+    <Compile Include="Twenty\Grid.cs" />
     <Compile Include="Two\DayTwo.cs" />
     <Compile Include="Two\PasswordData.cs" />
     <Compile Include="Utility\FileUtility.cs" />

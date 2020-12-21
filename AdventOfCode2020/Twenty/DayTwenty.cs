@@ -1,9 +1,7 @@
 ﻿using AdventOfCode2020.Utility;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace AdventOfCode2020.Twenty
 {
@@ -29,10 +27,58 @@ namespace AdventOfCode2020.Twenty
         public string PartB()
         {
             string filePath = @"Twenty\DayTwentyInput.txt";
-            return "";
+            long count = FindActivePixelsNotPartOfSeaMonster(filePath);
+            return count.ToString();
         }
 
         public long FindCornerProduct(string filePath)
+        {
+            Grid[,] overallMap = MakeCompositeMap(filePath);
+
+            long cornerProduct = overallMap[0, 0].Id
+                                 * overallMap[0, overallMap.GetLength(0) - 1].Id
+                                 * overallMap[overallMap.GetLength(1) - 1, 0].Id
+                                 * overallMap[overallMap.GetLength(0) - 1, overallMap.GetLength(1) - 1].Id;
+
+            return cornerProduct;
+        }
+
+        public long FindActivePixelsNotPartOfSeaMonster(string filePath)
+        {
+            Grid[,] overallMap = MakeCompositeMap(filePath);
+            // Trim all
+            for (int gridRow = 0; gridRow < overallMap.GetLength(0); gridRow++)
+            {
+                for (int gridCol = 0; gridCol < overallMap.GetLength(1); gridCol++)
+                {
+                    overallMap[gridRow, gridCol].TrimEdges();
+                    overallMap[gridRow, gridCol].Output();
+                }
+            }
+            Grid masterGrid = new Grid(overallMap);
+            int mostMonsters = 0;
+            // Go through all possibilities to find the most monsters
+            for (int i = 0; i < 8; i++)
+            {
+                masterGrid.Output();
+
+                int found = masterGrid.ContainsNumberOfSeaMonsters();
+                if (found > mostMonsters)
+                    mostMonsters = found;
+
+                // Otherwise rotate/flip
+                if (i == 3)
+                    masterGrid.FlipVertical();
+
+                masterGrid.Rotate();
+            }
+
+            long pixels = masterGrid.CountPixels();
+
+            return pixels - (mostMonsters * 15);
+        }
+
+        private Grid[,] MakeCompositeMap(string filePath)
         {
             List<Grid> grids = FileUtility.ParseFileToMultiLineList(filePath, lineGroup => new Grid(lineGroup), Grid.Separator);
             Dictionary<string, List<Grid>> validEdges = new Dictionary<string, List<Grid>>();
@@ -66,16 +112,14 @@ namespace AdventOfCode2020.Twenty
                     Grid above = row == 0 ? null : overallMap[row - 1, col];
                     Grid left = col == 0 ? null : overallMap[row, col - 1];
                     Grid found = FindTargetGrid(above, left, grids, validEdges);
+                    //found.TrimEdges();
                     // Remove the grid we found, so we don't alter it - this made me stumble for quite a while
                     grids.Remove(found);
                     overallMap[row, col] = found;
                 }
             }
 
-            long cornerProduct = overallMap[0, 0].Id * overallMap[0, size - 1].Id * overallMap[size - 1, 0].Id *
-                                 overallMap[size - 1, size - 1].Id;
-
-            return cornerProduct;
+            return overallMap;
         }
 
         private Grid FindTargetGrid(Grid above, Grid left, List<Grid> grids, Dictionary<string, List<Grid>> validEdges)
@@ -90,7 +134,6 @@ namespace AdventOfCode2020.Twenty
                     {
                         if (IsEdge(grid.TopEdge(), validEdges) && IsEdge(grid.LeftEdge(), validEdges))
                         {
-                            grid.Output();
                             return grid;
                         }
 
@@ -112,7 +155,6 @@ namespace AdventOfCode2020.Twenty
 
                         if (matchesTop && matchesLeft)
                         {
-                            grid.Output();
                             return grid;
                         }
                     }
@@ -131,117 +173,6 @@ namespace AdventOfCode2020.Twenty
         private bool IsEdge(string edge, Dictionary<string, List<Grid>> validEdges)
         {
             return validEdges[edge].Count() == 1;
-        }
-    }
-
-    public class Grid
-    {
-        public static string Separator => "|";
-
-        private List<char[]> _points;
-
-        public Grid(string lineGroup)
-        {
-            List<string> lines = lineGroup.Split('|').ToList();
-
-            var idString = lines.First(l => l.Contains("Tile")).Split(new string[] { "Tile ", ":" }, StringSplitOptions.None);
-            Id = long.Parse(idString[1]);
-            _points = lines.Where(l => !l.Contains("Tile"))
-                .Select(l => l.ToCharArray())
-                .ToList();
-        }
-
-        public long Id { get; }
-
-        public string TopEdge()
-        {
-            return string.Join("", _points.First());
-        }
-
-        public string BottomEdge()
-        {
-            return string.Join("", _points.Last());
-        }
-
-        public string LeftEdge()
-        {
-            StringBuilder builder = new StringBuilder();
-            foreach (char[] row in _points)
-            {
-                builder.Append(row.First());
-            }
-
-            return builder.ToString();
-        }
-
-        public string RightEdge()
-        {
-            StringBuilder builder = new StringBuilder();
-            foreach (char[] row in _points)
-            {
-                builder.Append(row.Last());
-            }
-
-            return builder.ToString();
-        }
-
-        public void Rotate()
-        {
-            List<char[]> newPoints = new List<char[]>();
-
-            for (int col = 0; col < _points[0].Length; col++)
-            {
-                StringBuilder builder = new StringBuilder();
-                for (int row = _points.Count - 1; row >= 0; row--)
-                {
-                    builder.Append(_points[row][col]);
-                }
-                newPoints.Add(builder.ToString().ToCharArray());
-            }
-
-            _points = newPoints;
-        }
-
-        public void FlipVertical()
-        {
-            List<char[]> newPoints = new List<char[]>();
-
-            for (int row = _points.Count - 1; row >= 0; row--)
-            {
-                StringBuilder builder = new StringBuilder();
-                for (int col = 0; col < _points[0].Length; col++)
-                {
-                    builder.Append(_points[row][col]);
-                }
-
-                newPoints.Add(builder.ToString().ToCharArray());
-            }
-
-            _points = newPoints;
-        }
-
-        public void Output()
-        {
-            Debug.WriteLine($"Id = {Id}");
-            for (int row = 0; row < _points.Count; row++)
-            {
-                StringBuilder rowBuilder = new StringBuilder();
-                for (int col = 0; col < _points[0].Length; col++)
-                {
-                    rowBuilder.Append(_points[row][col]);
-                }
-
-                Debug.WriteLine(rowBuilder.ToString());
-            }
-
-            Debug.WriteLine("");
-            Debug.WriteLine("===========");
-            Debug.WriteLine("");
-        }
-
-        public override string ToString()
-        {
-            return Id.ToString();
         }
     }
 }

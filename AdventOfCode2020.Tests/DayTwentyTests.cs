@@ -35,6 +35,20 @@ namespace AdventOfCode2020.Tests
         }
 
         [Fact]
+        public void Grid_TrimEdges()
+        {
+            string input = "Tile 2311:|..##.#..#.|##..#.....|#...##..#.|####.#...#|##.##.###.|##...#.###|.#.#.#..##|..#....#..|###...#.#.|..###..###";
+            var sut = new Grid(input);
+
+            var top = "..##.#..#.";
+            Assert.Equal(top, sut.TopEdge());
+
+            sut.TrimEdges();
+            var expected = "#..#....";
+            Assert.Equal(expected, sut.TopEdge());
+        }
+
+        [Fact]
         public void FindCornerProduct()
         {
             string filePath = @"Twenty\DayTwentyTestInputA.txt";
@@ -43,7 +57,17 @@ namespace AdventOfCode2020.Tests
 
             Assert.Equal(20899048083289, result);
         }
-        
+
+        [Fact]
+        public void FindActivePixelsNotPartOfSeaMonster()
+        {
+            string filePath = @"Twenty\DayTwentyTestInputA.txt";
+            var sut = new DayTwenty();
+            var result = sut.FindActivePixelsNotPartOfSeaMonster(filePath);
+
+            Assert.Equal(273, result);
+        }
+
         [Fact]
         public void PartA_Actual()
         {
@@ -59,7 +83,7 @@ namespace AdventOfCode2020.Tests
             var sut = new DayTwenty();
             var result = sut.PartB();
 
-            Assert.Equal("-1", result);
+            Assert.Equal("1537", result);
         }
     }
 }
