@@ -94,6 +94,7 @@
     <Compile Include="Twelve\DayTwelve.cs" />
     <Compile Include="Twelve\Location.cs" />
     <Compile Include="Twelve\Ship.cs" />
+    <Compile Include="Twenty\DayTwenty.cs" />
     <Compile Include="Two\DayTwo.cs" />
     <Compile Include="Two\PasswordData.cs" />
     <Compile Include="Utility\FileUtility.cs" />
@@ -221,6 +222,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Twelve\DayTwelveTestInputA.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Twenty\DayTwentyInput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Twenty\DayTwentyTestInputA.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Two\DayTwoInput.txt">
