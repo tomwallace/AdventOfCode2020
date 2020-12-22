@@ -94,6 +94,9 @@
     <Compile Include="Twelve\DayTwelve.cs" />
     <Compile Include="Twelve\Location.cs" />
     <Compile Include="Twelve\Ship.cs" />
+    <Compile Include="TwentyOne\DayTwentyOne.cs" />
+    <Compile Include="TwentyTwo\DayTwentyTwo.cs" />
+    <Compile Include="TwentyTwo\Player.cs" />
     <Compile Include="Twenty\DayTwenty.cs" />
     <Compile Include="Twenty\Grid.cs" />
     <Compile Include="Two\DayTwo.cs" />
@@ -223,6 +226,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Twelve\DayTwelveTestInputA.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TwentyOne\DayTwentyOneInput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TwentyOne\DayTwentyOneTestInputA.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TwentyTwo\DayTwentyTwoInput.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TwentyTwo\DayTwentyTwoTestInputA.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Twenty\DayTwentyInput.txt">
