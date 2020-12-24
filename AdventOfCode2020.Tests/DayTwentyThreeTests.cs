@@ -18,19 +18,22 @@ namespace AdventOfCode2020.Tests
             Assert.Equal(expected, result);
         }
 
+        // Takes 40 sec so commenting out
+        /*
         [Fact]
         public void CupGame_BigPlay()
         {
             var input = "389125467";
             var sut = new CupGame(input, 1000000);
             sut.Play(10000000);
-            
-            var right = sut.GetCup(1);
-            Assert.Equal(934001, right.Id);
 
-            var doubleRight = right.Right;
-            Assert.Equal(159792, doubleRight.Id);
+            var right = sut.GetCup(1);
+            Assert.Equal(934001, right.Next.Value);
+
+            var doubleRight = right.Next.Next;
+            Assert.Equal(159792, doubleRight.Value);
         }
+        */
 
         [Fact]
         public void PartA_Actual()
@@ -41,13 +44,16 @@ namespace AdventOfCode2020.Tests
             Assert.Equal("47598263", result);
         }
 
+        // Takes 40 sec so commenting out
+        /*
         [Fact]
         public void PartB_Actual()
         {
             var sut = new DayTwentyThree();
             var result = sut.PartB();
 
-            Assert.Equal("-1", result);
+            Assert.Equal("248009574232", result);
         }
+        */
     }
 }
