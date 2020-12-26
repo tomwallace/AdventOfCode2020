@@ -94,6 +94,9 @@
     <Compile Include="Twelve\DayTwelve.cs" />
     <Compile Include="Twelve\Location.cs" />
     <Compile Include="Twelve\Ship.cs" />
+    <Compile Include="TwentyFive\DayTwentyFive.cs" />
+    <Compile Include="TwentyFive\EncryptionBreaker.cs" />
+    <Compile Include="TwentyFive\LoopResult.cs" />
     <Compile Include="TwentyFour\DayTwentyFour.cs" />
     <Compile Include="TwentyFour\Hex.cs" />
     <Compile Include="TwentyFour\HexComparer.cs" />

@@ -9,7 +9,7 @@ namespace AdventOfCode2020.Sixteen
     {
         public string Description()
         {
-            return "Ticket Translation";
+            return "Ticket Translation [HARD]";
         }
 
         public int SortOrder()

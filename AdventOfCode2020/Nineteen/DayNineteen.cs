@@ -9,7 +9,7 @@ namespace AdventOfCode2020.Nineteen
     {
         public string Description()
         {
-            return "Monster Messages";
+            return "Monster Messages [HARD]";
         }
 
         public int SortOrder()

@@ -11,7 +11,7 @@ namespace AdventOfCode2020.Thirteen
         
         public string Description()
         {
-            return "Shuttle Search";
+            return "Shuttle Search [HARD]";
         }
 
         public int SortOrder()

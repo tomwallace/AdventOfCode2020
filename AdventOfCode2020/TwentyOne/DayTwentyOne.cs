@@ -1,8 +1,7 @@
-﻿using System;
+﻿using AdventOfCode2020.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using AdventOfCode2020.Utility;
 
 namespace AdventOfCode2020.TwentyOne
 {
@@ -10,7 +9,7 @@ namespace AdventOfCode2020.TwentyOne
     {
         public string Description()
         {
-            return "Allergen Assessment";
+            return "Allergen Assessment [HARD]";
         }
 
         public int SortOrder()
@@ -59,8 +58,6 @@ namespace AdventOfCode2020.TwentyOne
             do
             {
                 var current = allergenCausers.First(a => a.Value == null);
-
-
             } while (allergenCausers.Any(a => a.Value == null));
 
             return 0;
@@ -72,10 +69,10 @@ namespace AdventOfCode2020.TwentyOne
         public Food(string input)
         {
             // TODO: Replace with a RegEx expression
-            string[] splits = input.Split(new[] {"("}, StringSplitOptions.RemoveEmptyEntries);
+            string[] splits = input.Split(new[] { "(" }, StringSplitOptions.RemoveEmptyEntries);
             Ingredients = splits[0].Split(' ').ToList();
-            string allergens = splits[1].Split(new[] {"contains", ")"}, StringSplitOptions.RemoveEmptyEntries).First();
-            Allergens = allergens.Split(new[] {", "}, StringSplitOptions.RemoveEmptyEntries).ToList();
+            string allergens = splits[1].Split(new[] { "contains", ")" }, StringSplitOptions.RemoveEmptyEntries).First();
+            Allergens = allergens.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).ToList();
         }
 
         public List<string> Ingredients { get; set; }
@@ -85,11 +82,9 @@ namespace AdventOfCode2020.TwentyOne
 
     public class Ingredient
     {
-
     }
 
     public class Allergen
     {
-
     }
 }
