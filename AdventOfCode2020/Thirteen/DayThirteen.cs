@@ -22,7 +22,8 @@ namespace AdventOfCode2020.Thirteen
         public string PartA()
         {
             BusRoutes busRoutes = new BusRoutes(_timestamp, _buses);
-            long bestTime = busRoutes.FindBestBusWaitTime();
+            var sortedList = busRoutes.FindBestBusWaitTime();
+            long bestTime = sortedList.First().Key * sortedList.First().Value;
 
             return bestTime.ToString();
         }
@@ -36,7 +37,7 @@ namespace AdventOfCode2020.Thirteen
 
     public class BusRoutes
     {
-        private readonly long timestamp;
+        private long timestamp;
         private readonly List<long> buses;
         private readonly Dictionary<int, long> importantBuses;
 
@@ -58,7 +59,7 @@ namespace AdventOfCode2020.Thirteen
             }
         }
 
-        public long FindBestBusWaitTime()
+        public IOrderedEnumerable<KeyValuePair<long, long>> FindBestBusWaitTime()
         {
             Dictionary<long, long> waitTimes = new Dictionary<long, long>();
             
@@ -71,12 +72,41 @@ namespace AdventOfCode2020.Thirteen
                 waitTimes.Add(bus, nearestTime - timestamp);
             }
 
+            // TODO: Consider creating a bus class?
             var sortedList = waitTimes.OrderBy(wt => wt.Value);
-            return sortedList.First().Value * sortedList.First().Key;
+            return sortedList;
+            //return sortedList.First().Value * sortedList.First().Key;
         }
 
         public long FindEarliestTimeStampAllMatch()
         {
+            /*
+             var (baseBusId, _) = buses[0];
+             var (time, period) = (baseBusId, baseBusId);
+             
+             foreach (var (schedule, offset) in buses.Skip(1))
+            {
+              while ((time + offset) % schedule != 0) time += period;
+
+              period *= schedule;
+            }
+             */
+            /*
+            var sortedList = FindBestBusWaitTime();
+
+
+            long time = sortedList.First().Key;
+            long period = time;
+            foreach (var bus in sortedList.Skip(1))
+            {
+                while ((time + bus.Value) % bus.Key != 0)
+                {
+                    time += period;
+                }
+
+                period *= bus.Key;
+            }
+            */
             // TODO: Refactor to split massive values once prove this works
             for (long i = 0; i < long.MaxValue; i++)
             {
@@ -90,6 +120,43 @@ namespace AdventOfCode2020.Thirteen
         public bool IsValidTimestamp(long ts)
         {
             return importantBuses.All(ib => (ts + ib.Key) % ib.Value == 0);
+        }
+
+        // TODO: Still not working
+        // https://pastebin.com/jHpRYhzc
+        // Solution approach
+        //-------------------
+        // For any two elements a and b that each have their own periodicty, when treated as a group they have periodicity a*b.
+        // EG: one planet does a loop in 50 days, another in 70 days, if they line up at day=0 they'll line up again at 50*70 = 3500 days.
+        // So, this approach is to find the match with the next bus, then change the periodicity by multiplying by that bus's loop time
+        //   Then, move on to add another bus to the match and repeat.
+        public long FindWhenAllBusesMatch()
+        {
+            var busWaitTimes = FindBestBusWaitTime();
+
+            timestamp = busWaitTimes.First(b => b.Key == buses[0]).Value;
+            long incrementAmount = buses[0];   //As each periodicity pairing is found, increase the increment.
+            int lockedIn = 0;  //Keeps track of which buses have been matched to a periodicity with the group.
+
+            for (long testTime = timestamp; true; testTime += incrementAmount)
+            {
+                int nextBusToLookFor = lockedIn + 1;
+                timestamp = testTime + buses[nextBusToLookFor];
+
+                var localBusWaitTimes = FindBestBusWaitTime();
+                long nearestDepartureTime = localBusWaitTimes.First(b => b.Key == buses[nextBusToLookFor]).Value;  //GetEqualOrGreaterDepartureTime(requiredDepartureTime, busDepartureInfo[nextBusToLookFor].busNum);
+
+                if (timestamp == nearestDepartureTime)
+                {
+                    incrementAmount *= nextBusToLookFor;
+                    lockedIn = nextBusToLookFor;
+
+                    if (lockedIn == buses.Count - 1) //They're all lined up!
+                    {
+                        return testTime;
+                    }
+                }
+            }
         }
 
         // TODO: Break this down

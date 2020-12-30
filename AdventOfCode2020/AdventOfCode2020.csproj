@@ -84,6 +84,10 @@
     <Compile Include="Seven\BagConnection.cs" />
     <Compile Include="Seven\DaySeven.cs" />
     <Compile Include="Sixteen\DaySixteen.cs" />
+    <Compile Include="Sixteen\Rule.cs" />
+    <Compile Include="Sixteen\Ticket.cs" />
+    <Compile Include="Sixteen\TicketEvaluator.cs" />
+    <Compile Include="Sixteen\TicketRule.cs" />
     <Compile Include="Six\DaySix.cs" />
     <Compile Include="Six\GroupResponse.cs" />
     <Compile Include="Ten\Adapter.cs" />
