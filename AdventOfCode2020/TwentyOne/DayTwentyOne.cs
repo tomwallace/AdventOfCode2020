@@ -1,5 +1,4 @@
 ﻿using AdventOfCode2020.Utility;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,71 +19,74 @@ namespace AdventOfCode2020.TwentyOne
         public string PartA()
         {
             string filePath = @"TwentyOne\DayTwentyOneInput.txt";
-            return "";
+            int count = CountIngredientsWithoutAllergens(filePath);
+            return count.ToString();
         }
 
         public string PartB()
         {
             string filePath = @"TwentyOne\DayTwentyOneInput.txt";
-            return "";
+            string dangerousIngredients = GetDangerousIngredientList(filePath);
+            return dangerousIngredients;
         }
 
         public int CountIngredientsWithoutAllergens(string filePath)
         {
             List<Food> foods = FileUtility.ParseFileToList(filePath, line => new Food(line));
-            Dictionary<string, HashSet<string>> allergenIndex = new Dictionary<string, HashSet<string>>();
 
-            foreach (Food food in foods)
-            {
-                foreach (string allergen in food.Allergens)
-                {
-                    if (!allergenIndex.ContainsKey(allergen))
-                        allergenIndex.Add(allergen, new HashSet<string>());
-
-                    foreach (string ingredient in food.Ingredients)
-                    {
-                        allergenIndex[allergen].Add(ingredient);
-                    }
-                }
-            }
-
-            Dictionary<string, string> allergenCausers = new Dictionary<string, string>();
-            foreach (string key in allergenIndex.Keys)
-            {
-                allergenCausers.Add(key, null);
-            }
-
-            // TODO: Figure out what I am doing
+            List<string> allergens = foods.SelectMany(f => f.Allergens).Distinct().ToList();
             do
             {
-                var current = allergenCausers.First(a => a.Value == null);
-            } while (allergenCausers.Any(a => a.Value == null));
+                foreach (var a in allergens.ToList())
+                {
+                    HashSet<string> candidates = foods.First(f => f.Allergens.Contains(a)).Ingredients.ToHashSet();
 
-            return 0;
+                    foreach (Food f in foods.Where(f => f.Allergens.Contains(a)).Skip(1))
+                        candidates.IntersectWith(f.Ingredients);
+
+                    if (candidates.Count == 1)
+                    {
+                        string i = candidates.Single();
+
+                        foreach (Food f in foods)
+                            f.Ingredients.Remove(i);
+
+                        allergens.Remove(a);
+                    }
+                }
+            } while (allergens.Count != 0);
+
+            return foods.SelectMany(f => f.Ingredients).Count();
         }
-    }
 
-    public class Food
-    {
-        public Food(string input)
+        public string GetDangerousIngredientList(string filePath)
         {
-            // TODO: Replace with a RegEx expression
-            string[] splits = input.Split(new[] { "(" }, StringSplitOptions.RemoveEmptyEntries);
-            Ingredients = splits[0].Split(' ').ToList();
-            string allergens = splits[1].Split(new[] { "contains", ")" }, StringSplitOptions.RemoveEmptyEntries).First();
-            Allergens = allergens.Split(new[] { ", " }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<Food> foods = FileUtility.ParseFileToList(filePath, line => new Food(line));
+
+            Dictionary<string, string> allergenMap = new Dictionary<string, string>();
+            List<string> allergens = foods.SelectMany(f => f.Allergens).Distinct().ToList();
+            do
+            {
+                foreach (var a in allergens.ToList())
+                {
+                    HashSet<string> candidates = foods.First(f => f.Allergens.Contains(a)).Ingredients.ToHashSet();
+
+                    foreach (Food f in foods.Where(f => f.Allergens.Contains(a)).Skip(1))
+                        candidates.IntersectWith(f.Ingredients);
+
+                    if (candidates.Count == 1)
+                    {
+                        string i = allergenMap[a] = candidates.Single();
+
+                        foreach (Food f in foods)
+                            f.Ingredients.Remove(i);
+
+                        allergens.Remove(a);
+                    }
+                }
+            } while (allergens.Count != 0);
+
+            return string.Join(",", allergenMap.OrderBy(kvp => kvp.Key).Select(kvp => kvp.Value));
         }
-
-        public List<string> Ingredients { get; set; }
-
-        public List<string> Allergens { get; set; }
-    }
-
-    public class Ingredient
-    {
-    }
-
-    public class Allergen
-    {
     }
 }

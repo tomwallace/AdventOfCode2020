@@ -7,6 +7,20 @@ namespace AdventOfCode2020.Utility
     public static class FileUtility
     {
         /// <summary>
+        /// Returns the contents of a file as a single string
+        /// </summary>
+        /// <param name="filePath">The path of the file, relative to the root of the main project</param>
+        /// <returns>The contents of a file as a string</returns>
+        public static string ReadFileToString(string filePath)
+        {
+            StreamReader file = new StreamReader(filePath);
+            string contents = file.ReadToEnd();
+            file.Close();
+
+            return contents;
+        }
+
+        /// <summary>
         /// Splits a file into values of type T by carriage return, using a defined parser function.
         /// Returns the values as a List of type T
         /// </summary>
