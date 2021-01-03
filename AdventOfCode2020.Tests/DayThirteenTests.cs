@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using AdventOfCode2020.Thirteen;
+﻿using AdventOfCode2020.Thirteen;
+using System.Linq;
 using Xunit;
 
 namespace AdventOfCode2020.Tests
@@ -18,27 +18,27 @@ namespace AdventOfCode2020.Tests
             Assert.Equal(295, product);
         }
 
-        /*
-         * The earliest timestamp that matches the list 17,x,13,19 is 3417.
-67,7,59,61 first occurs at timestamp 754018.
-67,x,7,59,61 first occurs at timestamp 779210.
-67,7,x,59,61 first occurs at timestamp 1261476.
-1789,37,47,1889 first occurs at timestamp 1202161486.
-         */
-        // TODO: turn back on
+        [Fact]
+        public void BusRoutes_FindWhenAllBusesMatch()
+        {
+            string buses = "7,13,x,x,59,x,31,19";
+
+            var sut = new BusRoutes(0, buses);
+            var result = sut.FindWhenAllBusesMatch();
+            Assert.Equal(1068781, result);
+        }
+
         [Theory]
         [InlineData("7,13,x,x,59,x,31,19", 1068781)]
-        //[InlineData("17,x,13,19", 3417)]
-        //[InlineData("67,7,59,61", 754018)]
-        //[InlineData("67,x,7,59,61", 779210)]
-        //[InlineData("67,7,x,59,61", 1261476)]
-        //[InlineData("1789,37,47,1889", 1202161486)]
-        public void BusRoutes_FindEarliestTimeStampAllMatch(string buses, long expected)
+        [InlineData("17,x,13,19", 3417)]
+        [InlineData("67,7,59,61", 754018)]
+        [InlineData("67,x,7,59,61", 779210)]
+        [InlineData("67,7,x,59,61", 1261476)]
+        [InlineData("1789,37,47,1889", 1202161486)]
+        public void BusRoutes_FindWhenAllBusesMatchTheory(string buses, long expected)
         {
-            var sut = new BusRoutes(1000000, buses);
-            Assert.True(sut.IsValidTimestamp(expected));
-            // TODO: Was working on  FindWhenAllBusesMatch
-            var result = sut.FindEarliestTimeStampAllMatch();
+            var sut = new BusRoutes(0, buses);
+            var result = sut.FindWhenAllBusesMatch();
 
             Assert.Equal(expected, result);
         }
@@ -58,7 +58,7 @@ namespace AdventOfCode2020.Tests
             var sut = new DayThirteen();
             var result = sut.PartB();
 
-            Assert.Equal("-1", result);
+            Assert.Equal("526090562196173", result);
         }
     }
 }

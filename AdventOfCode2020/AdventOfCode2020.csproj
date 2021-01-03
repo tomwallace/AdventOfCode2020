@@ -92,6 +92,8 @@
     <Compile Include="Six\GroupResponse.cs" />
     <Compile Include="Ten\Adapter.cs" />
     <Compile Include="Ten\DayTen.cs" />
+    <Compile Include="Thirteen\Bus.cs" />
+    <Compile Include="Thirteen\BusRoutes.cs" />
     <Compile Include="Thirteen\DayThirteen.cs" />
     <Compile Include="Three\DayThree.cs" />
     <Compile Include="Three\Slope.cs" />
